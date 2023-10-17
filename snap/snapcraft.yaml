@@ -48,7 +48,7 @@ parts:
     plugin: nil
     source: https://github.com/project-chip/connectedhomeip.git
     source-depth: 1
-    source-tag: master
+    source-tag: 33052ccf3b906178f14f856f0f6c8810aab4ecdd
     source-submodules: []
     override-pull: |
       craftctl default
@@ -57,28 +57,15 @@ parts:
 
   zap:
     plugin: nil
-    source: https://github.com/project-chip/zap.git
-    source-depth: 1
-    source-tag: v2023.05.04
-    build-environment:
-      - NODE_VERSION: v18.16.1
     build-packages:
       - build-essential 
-      - libpango1.0-dev 
-      - libjpeg-dev 
-      - libgif-dev 
-      - librsvg2-dev
       - wget
+      - unzip
     override-build: |
       if [[ $SNAP_ARCH == "arm64" ]]; then
-        # Install node+npm
-        NODE=node-$NODE_VERSION-linux-$SNAP_ARCH
-        wget https://nodejs.org/dist/$NODE_VERSION/$NODE.tar.xz
-        tar -xJf $NODE.tar.xz
-        export PATH=$PWD/$NODE/bin:$PATH
-
-        # Install zap
-        npm install
+        # Download and install zap
+        wget https://github.com/project-chip/zap/releases/download/v2023.10.15-nightly/zap-linux-arm64.zip
+        unzip zap-linux-arm64.zip
 
         # Define the environment needed for the app build
         echo "export PATH=$PWD/$NODE/bin:$PATH" > env
