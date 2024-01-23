@@ -57,7 +57,8 @@ parts:
   
   lighting:
     plugin: nil
-    after: [matter-sdk]
+    after: [wiring-pi, matter-sdk]
+    source: app
     override-build: |
       cd ../../matter-sdk/build/matter-sdk
       source matter_sdk_env
