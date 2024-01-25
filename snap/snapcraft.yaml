@@ -60,7 +60,7 @@ parts:
     after: [wiring-pi, matter-sdk]
     source: app
     override-build: |
-      cd ../../matter-sdk/build/matter-sdk
+      cd ../../matter-sdk/build
       source matter_sdk_env
       
       # Copy and replace the application files
