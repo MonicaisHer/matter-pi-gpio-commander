@@ -59,9 +59,11 @@ parts:
     plugin: nil
     after: [wiring-pi, matter-sdk]
     source: app
+    build-environment:
+      - MATTER_SDK_ENV: ../../matter-sdk/build/matter_sdk_env
     override-build: |
-      cd ../../matter-sdk/build
-      source matter_sdk_env
+      # Source the Matter SDK environment variables
+      source $MATTER_SDK_ENV
       
       # Copy and replace the application files
       cp -vr $CRAFT_PART_BUILD/lighting-common/* examples/lighting-app/lighting-common/
